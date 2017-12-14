@@ -1,5 +1,8 @@
 package ddc.task.template;
 
+import static ddc.task.impl.ConfigurationTask.PARAM_NAME_CONF_PATH;
+
+import ddc.config.ArgsValue;
 import ddc.support.task.TaskException;
 import ddc.task.exec.TaskExecutor;
 import ddc.task.exec.TaskPool;
@@ -16,16 +19,16 @@ public class Main_Template implements TaskPoolFactory {
 	public static void main(String[] args) throws InterruptedException {
 		Main_Template main = new Main_Template();
 		TaskPoolManager m = new TaskPoolManager();
-		m.run(main, args);
+		m.run(main, new ArgsValue(args));
 	}
 
 
 	@Override
-	public TaskPool create(String[] args) throws TaskException {
+	public TaskPool create(ArgsValue args) throws TaskException {
 		TaskSchema schema1 = createSchema1();
 		TaskExecutor e = new TaskExecutor(schema1);
-		e.getContext().setParam(ConfigurationTask.PARAM_NAME_CONF_CLASS, Config_Template.class);
-		TaskPool p1 = new TaskPool(TaskPool.ExecutionType.Sequence);
+		e.getContext().setParam(PARAM_NAME_CONF_PATH, Config_Template.class);
+		TaskPool p1 = new TaskPool("Pool1", TaskPool.ExecutionType.Sequence);
 		p1.add(e);
 		return p1;
 	}

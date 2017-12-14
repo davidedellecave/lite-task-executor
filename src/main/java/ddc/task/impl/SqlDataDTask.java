@@ -7,7 +7,7 @@ import ddc.support.jdbc.JdbcConnectionFactory;
 import ddc.support.jdbc.PooledDatasourceFactory;
 import ddc.support.task.Task;
 
-public abstract class DatasourceTask extends Task {
+public abstract class SqlDataDTask extends Task {
 	private static PooledDatasourceFactory dsFactory = null;
 
 	public PooledDatasourceFactory getDatasourceFactory() {

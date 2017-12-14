@@ -4,21 +4,23 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import ddc.config.ArgsValue;
+import ddc.support.util.LogConsole;
+import ddc.support.util.LogListener;
 
 public class TaskPoolManager {
-	private final static Logger logger = Logger.getLogger(TaskPoolManager.class);
+	private final static LogListener logger = new LogConsole(TaskPoolManager.class);
 
-	public void run(TaskPoolFactory factory, String[] args) throws InterruptedException {
+	public void run(TaskPoolFactory factory, ArgsValue args) throws InterruptedException {
 		logger.info("\n------------------------- JobManager - Task List -------------------------");
 		TaskPool pool = factory.create(args);		
 		while (pool != null && pool.size() > 0) {
-			run(pool);
+			runSinglePool(pool);
 			pool = factory.onNext(pool);
 		}
 	}
 
-	private void run(TaskPool pool) throws InterruptedException {
+	public void runSinglePool(TaskPool pool) throws InterruptedException {
 		if (pool.getPoolType()==TaskPool.ExecutionType.Concurrent) {
 			runConcurrent(pool);
 		} else {

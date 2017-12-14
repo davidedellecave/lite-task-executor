@@ -6,6 +6,7 @@ import java.util.List;
 import ddc.support.task.TaskContext;
 import ddc.support.task.TaskInstance;
 import ddc.support.util.Chronometer;
+import ddc.support.util.ExceptionUtil;
 import ddc.support.util.LogConsole;
 import ddc.support.util.LogListener;
 
@@ -83,8 +84,8 @@ public class TaskExecutor implements Runnable {
 			t.terminateAsSucceeded();
 			logger.info(info + " - terminated");			
 			doRun(node.getOnSuccess());
-		} catch (Throwable e) {			
-			info = INFO + " - task:["+ node.getName() + "] error:[" + e.getMessage() + "]"; 
+		} catch (Throwable e) {						
+			info = INFO + " - task:["+ node.getName() + "] error:[" + e.getMessage() + "] + StackTrace:\n" + ExceptionUtil.getStackTrace(e); 
 			logger.error(info, e);
 			getContext().setException(e);
 			if (t!=null) t.terminatedAsFailed(e);

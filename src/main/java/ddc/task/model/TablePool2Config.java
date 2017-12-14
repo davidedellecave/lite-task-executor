@@ -3,7 +3,6 @@ package ddc.task.model;
 import java.util.List;
 
 import ddc.support.jdbc.JdbcConnectionFactory;
-import ddc.task.impl.TableConfig;
 
 public class TablePool2Config {
 	private boolean enabled = true;

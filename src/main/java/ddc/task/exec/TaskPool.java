@@ -1,11 +1,10 @@
 package ddc.task.exec;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class TaskPool extends ArrayList<TaskExecutor> {
 	private static final long serialVersionUID = 1L;
-	private UUID id = UUID.randomUUID();
+	private String id = "";
 	private ExecutionType poolType=ExecutionType.Sequence;
 	private int maxThreads = 1;
 	//
@@ -14,11 +13,13 @@ public class TaskPool extends ArrayList<TaskExecutor> {
 		Concurrent, Sequence 
 	}
 	
-	public TaskPool(ExecutionType poolType) {
+	public TaskPool(String id, ExecutionType poolType) {
+		this.id=id;
 		this.poolType=poolType;
 	}	
 	
-	public TaskPool(ExecutionType poolType, int maxThreads) {
+	public TaskPool(String id, ExecutionType poolType, int maxThreads) {
+		this.id=id;
 		this.poolType=poolType;
 		this.maxThreads=maxThreads;
 	}	
@@ -36,13 +37,10 @@ public class TaskPool extends ArrayList<TaskExecutor> {
 	public void setMaxThreads(int maxThreads) {
 		this.maxThreads = maxThreads;
 	}
-
-	public UUID getId() {
+	public String getId() {
 		return id;
 	}
-
-	public void setId(UUID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-
 }
