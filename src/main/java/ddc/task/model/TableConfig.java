@@ -1,4 +1,4 @@
-package ddc.task.impl;
+package ddc.task.model;
 
 public class TableConfig {
 	private boolean enabled;
@@ -8,11 +8,12 @@ public class TableConfig {
 	private String selectScriptFile;
 	
 	public TableConfig clone() {
-		TableConfig t = new TableConfig();
+		TableConfig t = new TableConfig();		
 		t.setColumns(this.columns);
 		t.setEnabled(this.enabled);
 		t.setMaxrows(this.maxrows);
 		t.setTable(this.table);
+		t.setSelectScriptFile(this.selectScriptFile);
 		return t;
 	}
 	
