@@ -10,9 +10,10 @@ public class TablePool2Config {
 	private int connectionRetry = 1;
 	private int concurrentConnections = 1;
 	private List<? extends TableConfig> tables = null;
-	private int fetch=0;
-	private int batch=0;
-	
+	private int fetch = 0;
+	private int batch = 0;
+	private String schema = "";
+
 	public List<? extends TableConfig> getTables() {
 		return tables;
 	}
@@ -52,7 +53,7 @@ public class TablePool2Config {
 	public void setBatch(int batch) {
 		this.batch = batch;
 	}
-	
+
 	public int getConnectionRetry() {
 		return connectionRetry;
 	}
@@ -68,10 +69,18 @@ public class TablePool2Config {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	public String getSchema() {
+		return schema;
+	}
+
+	public void setSchema(String schema) {
+		this.schema = schema;
+	}
 
 	@Override
 	public String toString() {
-		if (jdbcFactory!=null)
+		if (jdbcFactory != null)
 			return jdbcFactory.toString();
 		return super.toString();
 	}
